@@ -85,6 +85,9 @@ func New(clientID, clientSecret, orderSiteURL, subscriptionSiteURL string) *Clie
 	}
 }
 
+func (c *Client) SetHttpClient(client *http.Client)  {
+		c.httpCli = client
+}
 // GetApplicationAccessTokenHeader obtain OAuth AccessToken from HMS
 //
 // Source code originated from https://github.com/HMS-Core/hms-iap-serverdemo/blob/92241f97fed1b68ddeb7cb37ea4ca6e6d33d2a87/demo/atdemo.go#L37
