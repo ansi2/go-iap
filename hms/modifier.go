@@ -3,6 +3,7 @@ package hms
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"log"
 )
@@ -99,6 +100,6 @@ func (c *Client) modifySubscriptionQuery(ctx context.Context, requestBodyMap map
 	case "0":
 		return true, response, nil
 	default:
-		return false, response, c.getResponseErrorByCode(response.ResponseCode)
+		return false, response, errors.New(response.ResponseMessage)
 	}
 }
