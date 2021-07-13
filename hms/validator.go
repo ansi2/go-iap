@@ -83,7 +83,7 @@ func (c *Client) GetSubscriptionDataString(ctx context.Context, purchaseToken, s
 	if err := json.Unmarshal(bodyBytes, &resp); err != nil {
 		return "", err
 	}
-	if err := c.getResponseErrorByCode(resp.ResponseCode); err != nil {
+	if err := c.getResponseErrorByCode(resp.ResponseMessage); err != nil {
 		return "", err
 	}
 
@@ -140,7 +140,7 @@ func (c *Client) GetOrderDataString(ctx context.Context, purchaseToken, productI
 	if err := json.Unmarshal(bodyBytes, &resp); err != nil {
 		return "", "", err
 	}
-	if err := c.getResponseErrorByCode(resp.ResponseCode); err != nil {
+	if err := c.getResponseErrorByCode(resp.ResponseMessage); err != nil {
 		return "", "", err
 	}
 
@@ -245,7 +245,7 @@ func (c *Client) GetCanceledOrRefundedPurchases(
 		return canceledPurchases, continuationToken, cpl.ResponseCode, cpl.ResponseMessage, err
 	}
 	if cpl.ResponseCode != "0" {
-		return canceledPurchases, continuationToken, cpl.ResponseCode, cpl.ResponseMessage, c.getResponseErrorByCode(cpl.ResponseCode)
+		return canceledPurchases, continuationToken, cpl.ResponseCode, cpl.ResponseMessage, c.getResponseErrorByCode(cpl.ResponseMessage)
 	}
 
 	err = json.Unmarshal([]byte(cpl.CancelledPurchaseList), &canceledPurchases)

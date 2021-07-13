@@ -152,22 +152,23 @@ func (c *Client) getRootSubscriptionURLByFlag(flag int64) string {
 
 // get error based on result code returned from api
 func (c *Client) getResponseErrorByCode(code string) error {
-	switch code {
-	case "0":
-		return nil
-	case "5":
-		return ErrorResponseInvalidParameter
-	case "6":
-		return ErrorResponseCritical
-	case "8":
-		return ErrorResponseProductNotBelongToUser
-	case "9":
-		return ErrorResponseConsumedProduct
-	case "11":
-		return ErrorResponseAbnormalUserAccount
-	default:
-		return ErrorResponseUnknown
-	}
+	return errors.New(code)
+	//switch code {
+	//case "0":
+	//	return nil
+	//case "5":
+	//	return ErrorResponseInvalidParameter
+	//case "6":
+	//	return ErrorResponseCritical
+	//case "8":
+	//	return ErrorResponseProductNotBelongToUser
+	//case "9":
+	//	return ErrorResponseConsumedProduct
+	//case "11":
+	//	return ErrorResponseAbnormalUserAccount
+	//default:
+	//	return ErrorResponseUnknown
+	//}
 }
 
 // Errors
